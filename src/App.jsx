@@ -50,7 +50,7 @@ export default function App() {
   }, [searchParams]);
 
   if (!allCabang.includes(cabang)) {
-    return <h1>Not Available</h1>;
+    return <Loading />;
   }
 
   if (cabang.length <= 0) {
