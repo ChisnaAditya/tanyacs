@@ -51,8 +51,9 @@ export default function App() {
     formState: { errors },
   } = useForm();
 
-  let namaCS = allCS[Math.floor(Math.random() * allCS.length)].nama;
-  let nomorCS = allCS[Math.floor(Math.random() * allCS.length)].nomor;
+  const randomCS = Math.floor(Math.random() * allCS.length);
+  let namaCS = allCS[randomCS].nama;
+  let nomorCS = allCS[randomCS].nomor;
 
   const onSubmit = (data) => {
     return new Promise((resolve) => {
