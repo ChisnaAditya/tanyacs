@@ -21,6 +21,28 @@ export default function App() {
     "lampung",
     "serang",
   ];
+  const allCS = [
+    {
+      nama: "CS NADA",
+      nomor: "6281231393140",
+    },
+    {
+      nama: "CS CELSY",
+      nomor: "6281231250390",
+    },
+    {
+      nama: "CS FITA",
+      nomor: "6285231111117",
+    },
+    {
+      nama: "CS IMEL",
+      nomor: "6285864144024",
+    },
+    {
+      nama: "CS HANA",
+      nomor: "628155066203",
+    },
+  ];
 
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -29,18 +51,22 @@ export default function App() {
     formState: { errors },
   } = useForm();
 
+  let namaCS = allCS[Math.floor(Math.random() * allCS.length)].nama;
+  let nomorCS = allCS[Math.floor(Math.random() * allCS.length)].nomor;
+
   const onSubmit = (data) => {
     return new Promise((resolve) => {
       setIsLoading(!isLoading);
       setTimeout(() => {
         resolve();
         setIsLoading(false);
-        let pesan = `Halo CS ? Nama saya: ${data.nama.toUpperCase()} No Whatsapp: ${
+
+        let pesan = `Halo CS ${namaCS} \n Nama saya: ${data.nama.toUpperCase()} \n No Whatsapp: ${
           data.telefon
-        } Saya ingin tanya lebih lanjut tentang program ${data.program.toUpperCase()} di ${cabang.toUpperCase()} Minta info mengenai paket program tersebut ya kak � Terima kasih.`;
+        } \n Saya ingin tanya lebih lanjut tentang program ${data.program.toUpperCase()} di ${cabang.toUpperCase()} Minta info mengenai paket program tersebut ya kak.. \n Terima kasih.`;
+
         console.log(pesan);
-        alert(pesan.toString());
-        window.open(`https://wa.me/6282257138722?text=${pesan}`);
+        window.open(`https://wa.me/${nomorCS}?text=${pesan}`);
       }, 1000);
     });
   };
