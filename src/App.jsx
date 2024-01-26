@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Input, Select, SelectItem, Divider } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 import { UserIcon } from "./icon/UserIcon";
 import { ContactIcon } from "./icon/ContactIcon";
 import { BookIcon } from "./icon/BookIcon";
@@ -62,11 +62,12 @@ export default function App() {
         resolve();
         setIsLoading(false);
 
-        let pesan = `Halo CS ${namaCS} \n Nama saya: ${data.nama.toUpperCase()} \n No Whatsapp: ${
+        let pesan = `Halo *${namaCS}* %0a %0aNama saya: *${data.nama.toUpperCase()}* %0aNo Whatsapp: *${
           data.telefon
-        } \n Saya ingin tanya lebih lanjut tentang program ${data.program.toUpperCase()} di ${cabang.toUpperCase()} Minta info mengenai paket program tersebut ya kak.. \n Terima kasih.`;
+        }* %0aSaya ingin tanya lebih lanjut tentang program *${data.program.toUpperCase()}* di *${cabang.toUpperCase()}* Minta info mengenai paket program tersebut ya kak.. \n Terima kasih.`;
 
         console.log(pesan);
+
         window.open(`https://wa.me/${nomorCS}?text=${pesan}`);
       }, 1000);
     });

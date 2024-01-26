@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "firebase": "^8.10.1",
     "framer-motion": "^10.18.0",
+    "google-spreadsheet": "^4.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.3",
