@@ -44,6 +44,9 @@ export default function App() {
     },
   ];
 
+  const [utm_source, setUtmSource] = useState("");
+  const [utm_medium, setUtmMedium] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -62,20 +65,25 @@ export default function App() {
         resolve();
         setIsLoading(false);
 
-        let pesan = `Halo *${namaCS}* %0a %0aNama saya: *${data.nama.toUpperCase()}* %0aNo Whatsapp: *${
-          data.telefon
-        }* %0aSaya ingin tanya lebih lanjut tentang program *${data.program.toUpperCase()}* di *${cabang.toUpperCase()}* Minta info mengenai paket program tersebut ya kak.. \n Terima kasih.`;
+        let pesan = `Halo *${namaCS}* %0a 
+                    %0aNama saya: *${data.nama.toUpperCase()}* 
+                    %0aNo Whatsapp: *${data.telefon}* 
+                    %0aSaya ingin tanya lebih lanjut tentang program *${data.program.toUpperCase()}* di *${cabang.toUpperCase()}* 
+                    %0aMinta info mengenai paket program tersebut ya kak.. \n Terima kasih.`;
 
+        console.log("utm_source:" + utm_source + "utm_medium:" + utm_medium);
+
+        // window.open(`https://wa.me/${nomorCS}?text=${pesan}`);
         console.log(pesan);
-
-        window.open(`https://wa.me/${nomorCS}?text=${pesan}`);
       }, 1000);
     });
   };
 
   useEffect(() => {
     setCabang(searchParams.get("cabang"));
-  }, [searchParams]);
+    setUtmSource(searchParams.get("utm_source"));
+    setUtmMedium(searchParams.get("utm_medium"));
+  }, [searchParams, setUtmSource, setUtmMedium]);
 
   if (!allCabang.includes(cabang)) {
     return <Loading />;
@@ -94,10 +102,18 @@ export default function App() {
       </div>
       <div className="w-full h-screen p-5 lg:p-20">
         <article className="prose mb-10 text-center">
-          <h1> Kampung Inggris LC | {cabang.toUpperCase()}</h1>
-          <p>
-            Untuk tanya tanya CS by whatsapp, silakan isi form dibawah ini ya
-            kak, setelah ini kakak akan diarahkan ke whatsapp CS!
+          <h1>
+            {" "}
+            Kampung Inggris LC |{" "}
+            <span className="px-1 py-0 bg-yellow-400">
+              {cabang.toUpperCase()}
+            </span>
+          </h1>
+          <p className="italic">
+            Untuk tanya CS by{" "}
+            <span className="px-1 py-0 bg-yellow-400 ">Whatsapp</span>, silakan{" "}
+            <span className="font-bold">isi form</span> dibawah ini ya, setelah
+            ini kamu akan diarahkan ke whatsapp CS!
           </p>
         </article>
         <form
@@ -113,7 +129,7 @@ export default function App() {
             errorMessage={errors.nama && "Nama minimal 3 huruf"}
           />
           <Input
-            label="Nomor"
+            label="No. Whatsapp"
             type="tel"
             maxLength={13}
             radius="lg"
